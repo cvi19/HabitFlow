@@ -13,6 +13,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Verify buildozer.spec exists
+        run: |
+          pwd
+          ls -la
+          if [ -f buildozer.spec ]; then
+            echo "✓ buildozer.spec found!"
+            cat buildozer.spec | head -20
+          else
+            echo "✗ buildozer.spec NOT found!"
+            exit 1
+          fi
+
       - name: Set up Python 3.10
         uses: actions/setup-python@v5
         with:
